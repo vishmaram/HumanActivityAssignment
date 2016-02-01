@@ -1,13 +1,15 @@
 rm(list=ls())
 source("UtilityFunctions.R")
 
+getwd();
+
 ######################## DOWNLOAD THE FILES ##############
 
 # Below we downloaded the file and unzipped it to the data folder
 
 url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
-download.file(url=url, destfile = "data/projectFilesDataSet.zip", method = "curl")
-unzip("data/projectFilesDataSet.zip", exdir = "data/", overwrite = TRUE)
+download.file(url=url, destfile = "data/projectFilesDataSet.zip",method="auto")
+unzip("data/projectFilesDataSet.zip", exdir = "data", overwrite = TRUE)
 
 
 ####################### LIST OF FILES ########################
@@ -90,3 +92,5 @@ dataSubSet[,-(1:2)] <- sapply(dataSubSet[,-(1:2)],as.numeric)
 
 #Agreegate the measurement columns by Activity and Subject and store in summarysubset, which is final result
 summarySubSet <- aggregate(dataSubSet[,-(1:2)],dataSubSet[,1:2],mean)
+
+names(summarySubSet)
